@@ -3,8 +3,8 @@ from flask.json import jsonify
 
 
 from resources.flutterwave.views import (
-    create, hook, view_transaction, 
-    view_transactions, banks
+    bank_branches, create_transfer, hook, view_transfer, 
+    view_transfers, banks
 )
 
 flutterwave = Blueprint(
@@ -14,18 +14,18 @@ flutterwave = Blueprint(
 )
 
 flutterwave.add_url_rule(
-    '/transactions', 
-    view_func=create, 
+    '/transfers', 
+    view_func=create_transfer, 
     methods=['POST']
 )
 flutterwave.add_url_rule(
-    '/transactions/transaction_id', 
-    view_func=view_transaction, 
+    '/transfers/transfer_id', 
+    view_func=view_transfer, 
     methods=['GET']
 )
 flutterwave.add_url_rule(
-    '/transactions', 
-    view_func=view_transactions,
+    '/transfers', 
+    view_func=view_transfers,
     methods=['GET']
 )
 flutterwave.add_url_rule(
@@ -34,7 +34,12 @@ flutterwave.add_url_rule(
     methods=['POST']
 )
 flutterwave.add_url_rule(
-    '/banks', 
+    '/banks/<country>', 
     view_func=banks, 
+    methods=['GET']
+)
+flutterwave.add_url_rule(
+    '/banks/<bank_id>/branches', 
+    view_func=bank_branches, 
     methods=['GET']
 )

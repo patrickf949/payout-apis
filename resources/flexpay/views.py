@@ -3,21 +3,21 @@ from flask.json import jsonify
 from requests import get, post
 
 
-def create():
+def create_transfer():
     return jsonify({
         'message':"create"
     })
 
 
-def view_transaction(transaction_id):
+def view_transfer(transfer_id):
     return jsonify({
-        'message':'single transaction'
+        'message':'single transfer'
     })
 
 
-def view_transactions():
+def view_transfers():
     return jsonify({
-        'message':'multiple transaction'
+        'message':'multiple transfers'
     })
 
 

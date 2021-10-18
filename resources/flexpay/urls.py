@@ -2,7 +2,8 @@ from flask import Blueprint
 from flask.json import jsonify
 
 from resources.flexpay.views import (
-    banks, create, view_transaction, view_transactions, hook
+    banks, create_transfer, view_transfer, 
+    view_transfers, hook
 )
 
 flexpay = Blueprint(
@@ -12,18 +13,18 @@ flexpay = Blueprint(
 )
 
 flexpay.add_url_rule(
-    '/transactions', 
-    view_func=create, 
+    '/transfers', 
+    view_func=create_transfer, 
     methods=['POST']
 )
 flexpay.add_url_rule(
-    '/transactions/<transaction_id>', 
-    view_func=view_transaction, 
+    '/transfers/<transfer_id>', 
+    view_func=view_transfer, 
     methods=['GET']
 )
 flexpay.add_url_rule(
-    '/transactions', 
-    view_func=view_transactions, 
+    '/transfers', 
+    view_func=view_transfers, 
     methods=['GET']
 )
 flexpay.add_url_rule(
