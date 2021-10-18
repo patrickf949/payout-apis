@@ -10,7 +10,6 @@ base_url = 'https://api.flutterwave.com/v3'
 
 def create_transfer():
     try:
-
         data = request.get_json()
         data['reference']=str(uuid4())
         transfer = post(
@@ -18,7 +17,7 @@ def create_transfer():
             json=data,
             headers={
                 'Authorization':f'Bearer {FL_KEY}'
-            }
+            },
         )
         return jsonify({
             'message':"create transfer",
@@ -35,15 +34,46 @@ def create_transfer():
 
 
 def view_transfer(transfer_id):
-    return jsonify({
-        'message':'single transfer'
-    })
+    try:
+        transfer = get(
+            url=f'{base_url}/transfers/{transfer_id}',
+            headers={
+                'Authorization':f'Bearer {FL_KEY}'
+            },
+        )
+        return jsonify({
+            'message': 'single transfer',
+            'data':transfer.json(),
+            'status': True,
+        })
+    except Exception as error:
+        return jsonify({
+            'message': 'single transfer',
+            'error':error,
+            'status': False,
+        })
 
 
 def view_transfers():
-    return jsonify({
-        'message':'multiple transfers'
-    })
+    try:
+        transfer = get(
+            url=f'{base_url}/transfers',
+            headers={
+                'Authorization':f'Bearer {FL_KEY}'
+            },
+        )
+        return jsonify({
+            'message': 'single transfer',
+            'data': transfer.json(),
+            'status': True,
+        })
+    except Exception as error:
+        return jsonify({
+            'message': 'single transfer',
+            'error':error,
+            'status': False,
+        })
+
 
 def hook():
     return jsonify({

@@ -19,7 +19,7 @@ flutterwave.add_url_rule(
     methods=['POST']
 )
 flutterwave.add_url_rule(
-    '/transfers/transfer_id', 
+    '/transfers/<transfer_id>', 
     view_func=view_transfer, 
     methods=['GET']
 )
