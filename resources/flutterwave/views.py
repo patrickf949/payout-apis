@@ -54,10 +54,10 @@ def view_transfer(transfer_id):
         })
 
 
-def view_transfers(page):
+def view_transfers():
     try:
         transfer = get(
-            url=f'{base_url}/transfers?page={page}',
+            url=f'{base_url}/transfers',
             headers={
                 'Authorization':f'Bearer {FL_KEY}'
             },
@@ -105,19 +105,5 @@ def bank_branches(bank_id):
     return jsonify({
         'message':'banks',
         'banks':banks,
-        'success':True,
-    })
-
-
-def wallet_balance():
-    balance = get(
-        url=f'{base_url}balances',
-        headers={
-            'Authorization':f'Bearer {FL_KEY}'
-        }
-    ).json()
-    return jsonify({
-        'message':'wallet balance',
-        'data':balance,
         'success':True,
     })
